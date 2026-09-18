@@ -1,0 +1,8 @@
+[
+  {"id": "s1", "label": "10% Boost", "prize": "10% Boost", "weight": 30, "color": "#e63946", "image": null},
+  {"id": "s2", "label": "Nothing", "prize": "Better luck next time", "weight": 25, "color": "#457b9d", "image": null},
+  {"id": "s3", "label": "$1,000,000", "prize": "$1,000,000", "weight": 10, "color": "#2a9d8f", "image": null},
+  {"id": "s4", "label": "Xanax", "prize": "1x Xanax", "weight": 15, "color": "#f4a261", "image": null},
+  {"id": "s5", "label": "Nothing", "prize": "Better luck next time", "weight": 15, "color": "#264653", "image": null},
+  {"id": "s6", "label": "Jackpot", "prize": "Jackpot Prize", "weight": 5, "color": "#e9c46a", "image": null}
+]

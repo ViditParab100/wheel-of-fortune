@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# runtime data (created automatically, never committed)
+data/spins.csv
+data/state.json
+data/segments.json
+data/*.lock
+
+# uploaded wheel images (added live via /admin, not part of the repo)
+static/uploads/*
+!static/uploads/.gitkeep

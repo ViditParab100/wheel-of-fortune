@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wheel Admin</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <h1>Wheel Admin</h1>
+  <p class="subtitle">Server time right now: {{ now_utc }} &mdash; all times below are UTC.</p>
+
+  <div class="panel" style="max-width:640px;">
+    <h3>Spin window
+      <span class="pill {{ 'open' if window_open else 'closed' }}">{{ 'OPEN' if window_open else 'CLOSED' }}</span>
+    </h3>
+    <label for="window-start">Start (UTC)</label>
+    <input type="datetime-local" id="window-start" value="{{ state.window_start[:16] if state.window_start else '' }}" />
+    <label for="window-end">End (UTC)</label>
+    <input type="datetime-local" id="window-end" value="{{ state.window_end[:16] if state.window_end else '' }}" />
+    <div class="row-actions">
+      <button id="btn-open-new">Start brand-new window (resets everyone's spin)</button>
+      <button id="btn-update-times" class="secondary">Save times only</button>
+      {% if window_open %}
+      <button id="btn-close-now" class="danger">Close now</button>
+      {% else %}
+      <button id="btn-reopen" class="secondary">Reopen (same window)</button>
+      {% endif %}
+    </div>
+    <p id="window-msg" class="msg"></p>
+    <p class="msg" style="color:var(--muted)">Current window id: {{ state.window_id }}</p>
+  </div>
+
+  <div class="panel" style="max-width:640px;">
+    <h3>Wheel segments</h3>
+    <div id="segments-list"></div>
+    <div class="row-actions">
+      <button id="btn-add-segment" class="secondary">+ Add segment</button>
+      <button id="btn-save-segments">Save segments</button>
+    </div>
+    <p id="segments-msg" class="msg"></p>
+  </div>
+
+  <div class="panel" style="max-width:640px;">
+    <h3>Spin log ({{ spins|length }})</h3>
+    <div style="max-height:320px; overflow:auto;">
+      <table>
+        <thead><tr><th>Time (UTC)</th><th>Window</th><th>Torn ID</th><th>Name</th><th>Prize</th></tr></thead>
+        <tbody>
+          {% for row in spins %}
+          <tr>
+            <td>{{ row.timestamp[:19] }}</td>
+            <td>{{ row.window_id }}</td>
+            <td>{{ row.torn_id }}</td>
+            <td>{{ row.torn_name }}</td>
+            <td>{{ row.prize }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <form method="post" action="{{ url_for('admin_logout') }}">
+    <button type="submit" class="secondary">Log out</button>
+  </form>
+
+  <script id="initial-segments" type="application/json">{{ segments | tojson }}</script>
+  <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>

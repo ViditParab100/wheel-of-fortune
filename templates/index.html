@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Torn Wheel of Fortune</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <h1>Torn Wheel of Fortune</h1>
+  <p class="subtitle">Everyone gets exactly one spin per window.</p>
+
+  <div class="panel">
+    <div class="disclaimer">
+      <strong>About your API key:</strong> we ask for your Torn <em>Public</em> access
+      API key only to look up your Torn name and player ID for this one spin.
+      It is used for a single request and is never stored, logged, or reused —
+      you can generate a fresh key afterward if you like.
+    </div>
+    <p id="status-msg" class="msg"></p>
+  </div>
+
+  <div class="panel" id="verify-panel">
+    <form id="verify-form">
+      <label for="api-key">Torn Public API key</label>
+      <input type="text" id="api-key" autocomplete="off" placeholder="Paste your key here" required />
+      <button type="submit">Verify &amp; reveal the wheel</button>
+      <p id="verify-msg" class="msg"></p>
+    </form>
+  </div>
+
+  <div class="panel hidden" id="wheel-wrap">
+    <div id="wheel-container">
+      <canvas id="wheel" width="360" height="360"></canvas>
+    </div>
+    <button id="spin-btn">Spin the wheel</button>
+    <div id="result-banner" class="hidden"></div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/wheel.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
