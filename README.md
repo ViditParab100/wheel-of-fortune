@@ -57,6 +57,12 @@ Visit `http://127.0.0.1:5000/` for the player page and
 9. Whenever you push changes to GitHub: in the PythonAnywhere Bash console,
    `git pull`, then hit Reload on the Web tab again.
 
+**Troubleshooting: admin login rejected even with the right password.**
+The app loads `.env` from its own project folder explicitly (not from the
+process's working directory), so make sure the `.env` file from step 4
+actually sits next to `app.py` in `wheel-of-fortune/` — not in your home
+directory or elsewhere — then Reload.
+
 ## Admin workflow
 
 - `/admin` — log in with `ADMIN_PASSWORD`.
