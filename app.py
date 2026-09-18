@@ -3,6 +3,7 @@ import os
 import random
 import uuid
 from datetime import datetime, timezone
+from pathlib import Path
 
 from dotenv import load_dotenv
 from flask import Flask, jsonify, redirect, render_template, request, session, url_for
@@ -11,7 +12,10 @@ from werkzeug.utils import secure_filename
 import storage
 import torn_api
 
-load_dotenv()
+# Pass the path explicitly - python-dotenv's auto-detection walks up from the
+# process's working directory, which under a WSGI server isn't reliably this
+# project's folder, so relying on it can silently load nothing.
+load_dotenv(Path(__file__).resolve().parent / ".env")
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev-only-insecure-key")
